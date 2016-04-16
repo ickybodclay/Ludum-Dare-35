@@ -1,21 +1,21 @@
 fileFormatVersion: 2
-guid: 63b5ca9b9edd8d24683bae0b28643496
-timeCreated: 1460829604
+guid: e81b6d75af12dff45921f0d8086c3214
+timeCreated: 1460837335
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: character-sheet_0
-    21300002: character-sheet_1
-    21300004: character-sheet_2
-    21300006: character-sheet_3
-    21300008: character-sheet_4
-    21300010: character-sheet_5
-    21300012: character-sheet_6
-    21300014: character-sheet_7
+    21300000: shapeshifter-sheet_0
+    21300002: shapeshifter-sheet_1
+    21300004: shapeshifter-sheet_2
+    21300006: shapeshifter-sheet_3
+    21300008: shapeshifter-sheet_4
+    21300010: shapeshifter-sheet_5
+    21300012: shapeshifter-sheet_6
+    21300014: shapeshifter-sheet_7
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     linearTexture: 0
     correctGamma: 0
     fadeOut: 0
@@ -58,62 +58,73 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: character-sheet_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 24
-        width: 8
-        height: 8
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-    - name: character-sheet_1
+    - name: shapeshifter-sheet_0
       rect:
         serializedVersion: 2
         x: 8
-        y: 24
+        y: 48
         width: 8
         height: 8
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: character-sheet_2
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 24
-        width: 8
-        height: 8
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-    - name: character-sheet_3
+    - name: shapeshifter-sheet_1
       rect:
         serializedVersion: 2
         x: 24
-        y: 24
+        y: 48
         width: 8
         height: 8
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: character-sheet_4
+    - name: shapeshifter-sheet_2
       rect:
         serializedVersion: 2
-        x: 0
-        y: 16
+        x: 40
+        y: 48
         width: 8
         height: 8
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: character-sheet_5
+    - name: shapeshifter-sheet_3
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 32
+        width: 8
+        height: 8
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: shapeshifter-sheet_4
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 32
+        width: 8
+        height: 8
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: shapeshifter-sheet_5
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 32
+        width: 8
+        height: 8
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: shapeshifter-sheet_6
       rect:
         serializedVersion: 2
         x: 8
@@ -124,18 +135,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: character-sheet_6
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 16
-        width: 8
-        height: 8
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-    - name: character-sheet_7
+    - name: shapeshifter-sheet_7
       rect:
         serializedVersion: 2
         x: 24

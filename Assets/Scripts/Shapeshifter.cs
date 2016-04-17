@@ -100,9 +100,7 @@ public class Shapeshifter : MonoBehaviour {
 
     private IEnumerator TransfromCooldown() {
         m_IsTransforming = true;
-        m_Rigidbody.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
         yield return new WaitForSeconds(1f);
         m_IsTransforming = false;
-        m_Rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 }

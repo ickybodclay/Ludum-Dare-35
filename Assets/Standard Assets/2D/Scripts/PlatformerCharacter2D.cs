@@ -90,7 +90,7 @@ namespace UnityStandardAssets._2D
                 }
             }
             // If the player should jump...
-            if (m_Grounded && jump && m_Anim.GetBool("Ground"))
+            if ((m_Grounded || m_CanFly) && jump)
             {
                 // Add a vertical force to the player.
                 m_Grounded = false;
@@ -109,6 +109,23 @@ namespace UnityStandardAssets._2D
             Vector3 theScale = transform.localScale;
             theScale.x *= -1;
             transform.localScale = theScale;
+        }
+
+        public void setMaxSpeed(float maxSpeed) {
+            m_MaxSpeed = maxSpeed;
+        }
+
+        public void setJumpForce(float jumpForce) {
+            m_JumpForce = jumpForce;
+        }
+
+        private bool m_CanFly;
+        public void setCanFly(bool canFly) {
+            m_CanFly = canFly;
+        }
+
+        public bool isGrounded() {
+            return m_Grounded;
         }
     }
 }

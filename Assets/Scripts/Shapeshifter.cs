@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityStandardAssets._2D;
 
 [RequireComponent(typeof(PlatformerCharacter2D))]
@@ -14,8 +15,9 @@ public class Shapeshifter : MonoBehaviour {
     private PlatformerCharacter2D m_Platformer;
     private Rigidbody2D m_Rigidbody;
     private Animator m_Animator;
-    private Form m_CurrentForm;
+    private Form m_CurrentForm = Form.HUMAN;
     private Form m_PreviousForm;
+    private bool m_IsTransforming;
 
     public GameObject m_TransformEffectPrefab;
 
@@ -33,48 +35,74 @@ public class Shapeshifter : MonoBehaviour {
         m_Rigidbody = GetComponent<Rigidbody2D>();
         m_Animator = GetComponent<Animator>();
 
-        m_CurrentForm = Form.HUMAN;
+        ChangeForm(Form.HUMAN);
 	}
 	
 	void Update () {
-        m_PreviousForm = m_CurrentForm;
 	    if (Input.GetKeyDown(KeyCode.Alpha1) && m_Platformer.isGrounded()) {
-            m_CurrentForm = Form.HUMAN;
-            m_Platformer.setMaxSpeed(m_HumanMaxSpeed);
-            m_Platformer.setJumpForce(m_HumanJumpForce);
-            m_Platformer.setCanFly(false);
-            m_Rigidbody.gravityScale = 2.5f;
+            ChangeForm(Form.HUMAN);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2) && m_Platformer.isGrounded()) {
-            m_CurrentForm = Form.BIRD;
-            m_Platformer.setMaxSpeed(m_BirdMaxSpeed);
-            m_Platformer.setJumpForce(m_BirdJumpForce);
-            m_Platformer.setCanFly(true);
-            m_Rigidbody.gravityScale = 1f;
+            ChangeForm(Form.BIRD);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3) && m_Platformer.isGrounded()) {
-            m_CurrentForm = Form.BEAR;
-            m_Platformer.setMaxSpeed(m_BearMaxSpeed);
-            m_Platformer.setJumpForce(m_BearJumpForce);
-            m_Platformer.setCanFly(false);
-            m_Rigidbody.gravityScale = 2.5f;
+            ChangeForm(Form.BEAR);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha4) && m_Platformer.isGrounded()) {
-            m_CurrentForm = Form.FOX;
-            m_Platformer.setMaxSpeed(m_FoxMaxSpeed);
-            m_Platformer.setJumpForce(m_FoxJumpForce);
-            m_Platformer.setCanFly(false);
-            m_Rigidbody.gravityScale = 2.5f;
+            ChangeForm(Form.FOX);
+        }        
+    }
+
+    private void ChangeForm(Form newForm) {
+        if (m_IsTransforming) return;
+
+        m_PreviousForm = m_CurrentForm;
+        m_CurrentForm = newForm;
+        switch (m_CurrentForm) {
+            case Form.HUMAN:
+                m_Platformer.setMaxSpeed(m_HumanMaxSpeed);
+                m_Platformer.setJumpForce(m_HumanJumpForce);
+                m_Platformer.setCanFly(false);
+                m_Rigidbody.gravityScale = 2.5f;
+                break;
+            case Form.BIRD:
+                m_Platformer.setMaxSpeed(m_BirdMaxSpeed);
+                m_Platformer.setJumpForce(m_BirdJumpForce);
+                m_Platformer.setCanFly(true);
+                m_Rigidbody.gravityScale = 1f;
+                break;
+            case Form.BEAR:
+                m_Platformer.setMaxSpeed(m_BearMaxSpeed);
+                m_Platformer.setJumpForce(m_BearJumpForce);
+                m_Platformer.setCanFly(false);
+                m_Rigidbody.gravityScale = 2.5f;
+                break;
+            case Form.FOX:
+                m_Platformer.setMaxSpeed(m_FoxMaxSpeed);
+                m_Platformer.setJumpForce(m_FoxJumpForce);
+                m_Platformer.setCanFly(false);
+                m_Rigidbody.gravityScale = 2.5f;
+                break;
         }
 
         if (m_CurrentForm != m_PreviousForm) {
+            m_Animator.SetFloat("Speed", 0f);
             m_Animator.SetInteger("Form", (int)m_CurrentForm);
             SpawnTransformEffect();
+            StartCoroutine(TransfromCooldown());
         }
     }
 
     private void SpawnTransformEffect() {
         GameObject transformEffect = Instantiate(m_TransformEffectPrefab, transform.position, Quaternion.identity) as GameObject;
         Destroy(transformEffect, 3f);
+    }
+
+    private IEnumerator TransfromCooldown() {
+        m_IsTransforming = true;
+        m_Rigidbody.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+        yield return new WaitForSeconds(1f);
+        m_IsTransforming = false;
+        m_Rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 }

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: e81b6d75af12dff45921f0d8086c3214
-timeCreated: 1460837335
+timeCreated: 1460924606
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -12,6 +12,7 @@ TextureImporter:
     21300010: shapeshifter-sheet_5
     21300012: shapeshifter-sheet_6
     21300014: shapeshifter-sheet_7
+    21300016: shapeshifter-sheet_8
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -139,6 +140,17 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 24
+        y: 16
+        width: 8
+        height: 8
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: shapeshifter-sheet_8
+      rect:
+        serializedVersion: 2
+        x: 40
         y: 16
         width: 8
         height: 8

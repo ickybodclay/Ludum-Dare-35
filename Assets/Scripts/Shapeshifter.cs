@@ -23,12 +23,12 @@ public class Shapeshifter : MonoBehaviour {
 
     public float m_HumanMaxSpeed;
     public float m_HumanJumpForce;
-    //public float m_BirdMaxSpeed;
-    //public float m_BirdJumpForce;
+    public float m_BirdMaxSpeed;
+    public float m_BirdJumpForce;
     public float m_BearMaxSpeed;
     public float m_BearJumpForce;
-    //public float m_FoxMaxSpeed;
-    //public float m_FoxJumpForce;
+    public float m_FoxMaxSpeed;
+    public float m_FoxJumpForce;
 
 	void Start () {
         m_Platformer = GetComponent<PlatformerCharacter2D>();
@@ -42,15 +42,15 @@ public class Shapeshifter : MonoBehaviour {
 	    if (Input.GetKeyDown(KeyCode.Alpha1) && m_Platformer.isGrounded()) {
             ChangeForm(Form.HUMAN);
         }
-        //else if (Input.GetKeyDown(KeyCode.Alpha2) && m_Platformer.isGrounded()) {
-        //    ChangeForm(Form.BIRD);
-        //}
         else if (Input.GetKeyDown(KeyCode.Alpha2) && m_Platformer.isGrounded()) {
+            ChangeForm(Form.BIRD);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3) && m_Platformer.isGrounded()) {
             ChangeForm(Form.BEAR);
         }
-        //else if (Input.GetKeyDown(KeyCode.Alpha4) && m_Platformer.isGrounded()) {
-        //    ChangeForm(Form.FOX);
-        //}        
+        else if (Input.GetKeyDown(KeyCode.Alpha4) && m_Platformer.isGrounded()) {
+            ChangeForm(Form.FOX);
+        }        
     }
 
     private void ChangeForm(Form newForm) {
@@ -65,24 +65,24 @@ public class Shapeshifter : MonoBehaviour {
                 m_Platformer.setCanFly(false);
                 m_Rigidbody.gravityScale = 2.5f;
                 break;
-            //case Form.BIRD:
-            //    m_Platformer.setMaxSpeed(m_BirdMaxSpeed);
-            //    m_Platformer.setJumpForce(m_BirdJumpForce);
-            //    m_Platformer.setCanFly(true);
-            //    m_Rigidbody.gravityScale = 1f;
-            //    break;
+            case Form.BIRD:
+                m_Platformer.setMaxSpeed(m_BirdMaxSpeed);
+                m_Platformer.setJumpForce(m_BirdJumpForce);
+                m_Platformer.setCanFly(true);
+                m_Rigidbody.gravityScale = 1f;
+                break;
             case Form.BEAR:
                 m_Platformer.setMaxSpeed(m_BearMaxSpeed);
                 m_Platformer.setJumpForce(m_BearJumpForce);
                 m_Platformer.setCanFly(false);
                 m_Rigidbody.gravityScale = 2.5f;
                 break;
-            //case Form.FOX:
-            //    m_Platformer.setMaxSpeed(m_FoxMaxSpeed);
-            //    m_Platformer.setJumpForce(m_FoxJumpForce);
-            //    m_Platformer.setCanFly(false);
-            //    m_Rigidbody.gravityScale = 2.5f;
-            //    break;
+            case Form.FOX:
+                m_Platformer.setMaxSpeed(m_FoxMaxSpeed);
+                m_Platformer.setJumpForce(m_FoxJumpForce);
+                m_Platformer.setCanFly(false);
+                m_Rigidbody.gravityScale = 2.5f;
+                break;
         }
 
         if (m_CurrentForm != m_PreviousForm) {
@@ -102,5 +102,12 @@ public class Shapeshifter : MonoBehaviour {
         m_IsTransforming = true;
         yield return new WaitForSeconds(1f);
         m_IsTransforming = false;
+    }
+
+    void OnTriggerEnter2D(Collider2D other) {
+        if (other.tag == "Goal") {
+            Debug.Log("You win!");
+            
+        }
     }
 }

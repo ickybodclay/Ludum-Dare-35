@@ -19,6 +19,7 @@ namespace UnityStandardAssets._2D
         private Animator m_Anim;            // Reference to the player's animator component.
         private Rigidbody2D m_Rigidbody2D;
         private bool m_FacingRight = true;  // For determining which way the player is currently facing.
+        public AudioClip m_JumpSfx;
 
         private void Awake()
         {
@@ -51,6 +52,8 @@ namespace UnityStandardAssets._2D
 
         public void Move(float move, bool crouch, bool jump)
         {
+            if (!m_CanMove) return;
+
             // If crouching, check to see if the character can stand up
             if (!crouch && m_Anim.GetBool("Crouch"))
             {
@@ -96,7 +99,14 @@ namespace UnityStandardAssets._2D
                 m_Grounded = false;
                 m_Anim.SetBool("Ground", false);
                 m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+                PlayJumpSfx();
             }
+        }
+
+        private void PlayJumpSfx() {
+            GetComponent<AudioSource>().clip = m_JumpSfx;
+            GetComponent<AudioSource>().pitch = UnityEngine.Random.Range(0.9f, 1.05f);
+            GetComponent<AudioSource>().Play();
         }
 
 
@@ -126,6 +136,11 @@ namespace UnityStandardAssets._2D
 
         public bool isGrounded() {
             return m_Grounded;
+        }
+
+        private bool m_CanMove = true;
+        public void disableMove() {
+            m_CanMove = false;
         }
     }
 }

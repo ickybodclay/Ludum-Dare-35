@@ -21,6 +21,8 @@ public class Shapeshifter : MonoBehaviour {
 
     public GameObject m_TransformEffectPrefab;
 
+    public AudioClip m_ShiftSfx;
+
     public float m_HumanMaxSpeed;
     public float m_HumanJumpForce;
     public float m_BirdMaxSpeed;
@@ -88,6 +90,7 @@ public class Shapeshifter : MonoBehaviour {
         if (m_CurrentForm != m_PreviousForm) {
             m_Animator.SetFloat("Speed", 0f);
             m_Animator.SetInteger("Form", (int)m_CurrentForm);
+            PlayShiftSfx();
             SpawnTransformEffect();
             StartCoroutine(TransfromCooldown());
         }
@@ -107,7 +110,15 @@ public class Shapeshifter : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other) {
         if (other.tag == "Goal") {
             Debug.Log("You win!");
-            
+            other.GetComponent<AudioSource>().Play();
+            m_Platformer.disableMove();
+            GameManager.instance.ShowWinScreen();
         }
+    }
+
+    private void PlayShiftSfx() {
+        GetComponent<AudioSource>().clip = m_ShiftSfx;
+        GetComponent<AudioSource>().pitch = Random.Range(0.9f, 1.05f);
+        GetComponent<AudioSource>().Play();
     }
 }
